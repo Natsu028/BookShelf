@@ -15,8 +15,6 @@ import io.realm.RealmResults;
 public class MainActivity extends AppCompatActivity
         implements View.OnClickListener {
 
-    public Realm realm;
-
     public FloatingActionButton fab;
     public ListView listView;
 
@@ -25,36 +23,20 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        realm = Realm.getDefaultInstance();
-
         fab = (FloatingActionButton) findViewById(R.id.fab);
         listView = (ListView) findViewById(R.id.listview);
         fab.setOnClickListener(this);
-    }
-
-    public void setMemoList(){
-
-        //Realmから読み取る
-        RealmResults<Memo> results = realm.where(Memo.class).findAll();
-        List<Memo> items = realm.copyFromRealm(results);
-
-        MemoAdapter adapter = new MemoAdapter(this, R.layout.layout_item_memo, items);
-
-        listView.setAdapter(adapter);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        setMemoList();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
-        realm.close();
     }
 
     @Override

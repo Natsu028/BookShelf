@@ -25,34 +25,14 @@ public class CreateActivity extends AppCompatActivity {
         titleEditText = (EditText) findViewById(R.id.titleEditText);
     }
 
-    public void save(final String title){
-
-        realm.executeTransaction(new Realm.Transaction(){
-            @Override
-            public  void execute(Realm bgRealm){
-                Memo memo = realm.createObject(Memo.class);
-                memo.bookname = title;
-            }
-        });
-    }
-
     // EditTextに入力されたデータを元にMemoを作る
     public void create(View view){
         //タイトルを取得する
         String title = titleEditText.getText().toString();
 
-        //check(title);
-
-        save(title);
+        check(title);
 
         finish();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        realm.close();
     }
 
     public void check(String title){

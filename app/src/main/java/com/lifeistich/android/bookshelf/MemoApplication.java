@@ -15,6 +15,7 @@ public class MemoApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        //Realmの初期化
         Realm.init(getApplicationContext());
     }
 }
